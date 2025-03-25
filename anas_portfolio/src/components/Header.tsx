@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 const navItems = [
-  { href: '#home', label: 'Accueil' },
-  { href: '#about', label: 'À propos' },
-  { href: '#experience', label: 'Expériences' },
-  { href: '#projects', label: 'Projets' },
-  { href: '#skills', label: 'Compétences' },
-  { href: '#contact', label: 'Contact' }
+  { href: '#home', label: 'nav.home' },
+  { href: '#about', label: 'nav.about' },
+  { href: '#experience', label: 'nav.experience' },
+  { href: '#projects', label: 'nav.projects' },
+  { href: '#skills', label: 'nav.skills' },
+  { href: '#contact', label: 'nav.contact' }
 ];
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   return (
     <header className="fixed w-full bg-background-light/80 backdrop-blur-lg border-b border-primary/10 z-50">
@@ -24,7 +27,7 @@ export const Header = () => {
             <span className="text-accent">/&gt;</span>
           </a>
           
-          <nav className="hidden md:block">
+          <nav className="hidden md:flex items-center gap-8">
             <ul className="flex space-x-8">
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -32,12 +35,13 @@ export const Header = () => {
                     href={item.href}
                     className="text-gray-300 hover:text-accent transition-colors relative group"
                   >
-                    {item.label}
+                    {t(item.label)}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
                   </a>
                 </li>
               ))}
             </ul>
+            <LanguageSwitcher />
           </nav>
 
           <button 
@@ -65,10 +69,13 @@ export const Header = () => {
                     className="block text-gray-300 hover:text-accent transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
-                    {item.label}
+                    {t(item.label)}
                   </a>
                 </li>
               ))}
+              <li className="pt-2">
+                <LanguageSwitcher />
+              </li>
             </ul>
           </motion.nav>
         )}

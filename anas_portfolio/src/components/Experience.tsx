@@ -1,16 +1,32 @@
 import { motion } from 'framer-motion';
-import { experiences } from '../data';
-import { Briefcase, Calendar } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export const Experience = () => {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
   const companyLogos = {
-    "Airbus": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Airbus_logo_2017.svg/2560px-Airbus_logo_2017.svg.png",
+    "Airbus": "https://imgs.search.brave.com/XH2X63RhrmAv5_BXUo3j9sN-P-f2I6o8waj_fnIfN4A/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy81/LzVkL0FpcmJ1c19M/b2dvXzIwMTcuc3Zn",
     "CETIM": "https://www.cetim.fr/wp-content/themes/cetim/img/logo-cetim.svg",
     "Junior Entreprise POLYTECH LILLE": "https://www.juniorpolytech.fr/wp-content/uploads/2019/09/logo-junior-polytech-lille.png"
   };
+
+  const experiences = [
+    {
+      company: "Airbus",
+      translationKey: "airbus"
+    },
+    {
+      company: "CETIM",
+      translationKey: "cetim"
+    },
+    {
+      company: "Junior Entreprise POLYTECH LILLE",
+      translationKey: "junior"
+    }
+  ];
 
   return (
     <section id="experience" className={`py-20 relative ${theme === 'dark' ? 'bg-background-dark' : 'bg-gray-50'}`}>
@@ -22,64 +38,52 @@ export const Experience = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${
-            theme === 'dark' ? 'text-white' : 'text-gray-900'
-          }`}>
-            Expériences <span className="text-primary">Professionnelles</span>
+          <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+            {t('experience.title')} <span className="text-primary">{t('experience.subtitle')}</span>
           </h2>
           <div className="w-20 h-1 bg-accent mx-auto rounded-full" />
         </motion.div>
 
         <div className="relative">
-          {/* Timeline line */}
           <div className={`absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 ${theme === 'dark' ? 'bg-primary/20' : 'bg-primary/30'}`} />
 
           <div className="space-y-12">
-            {experiences.map((experience, index) => (
+            {experiences.map((exp, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.2 }}
-                className={`flex items-center ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                } gap-8`}
+                className={`flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8`}
               >
                 <div className="flex-1">
-                  <div className={`${
-                    theme === 'dark'
-                      ? 'bg-background-light/30 backdrop-blur-lg border-primary/20'
-                      : 'bg-white shadow-lg border-gray-200'
-                  } rounded-2xl p-6 border`}>
+                  <div className={`${theme === 'dark' ? 'bg-background-light/30 backdrop-blur-lg border-primary/20' : 'bg-white shadow-lg border-gray-200'} rounded-2xl p-6 border`}>
                     <div className="flex items-center gap-2 mb-4">
                       <Calendar className="w-5 h-5 text-accent" />
-                      <span className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{experience.date}</span>
+                      <span className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+                        {t(`experience.positions.${exp.translationKey}.date`)}
+                      </span>
                     </div>
                     <div className="flex items-center gap-4 mb-4">
-                      {companyLogos[experience.company] && (
+                      {companyLogos[exp.company] && (
                         <img 
-                          src={companyLogos[experience.company]} 
-                          alt={`${experience.company} logo`}
+                          src={companyLogos[exp.company]} 
+                          alt={`${exp.company} logo`}
                           className={`h-12 object-contain ${theme === 'dark' ? 'brightness-200' : ''}`}
                         />
                       )}
                       <div>
                         <h3 className={`text-xl font-semibold ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
-                          {experience.company}
+                          {exp.company}
                         </h3>
                         <h4 className={`text-lg text-primary mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-                          {experience.title}
+                          {t(`experience.positions.${exp.translationKey}.title`)}
                         </h4>
                       </div>
                     </div>
-                    {experience.description && (
-                      <p className={`text-gray-400 mb-4 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-                        {experience.description}
-                      </p>
-                    )}
                     <ul className="space-y-2">
-                      {experience.achievements.map((achievement, i) => (
+                      {t(`experience.positions.${exp.translationKey}.achievements`, { returnObjects: true }).map((achievement: string, i: number) => (
                         <li key={i} className={`text-gray-300 flex items-start gap-2 ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'}`}>
                           <span className="text-accent">•</span>
                           {achievement}

@@ -6,6 +6,7 @@ import { Projects } from './components/Project';
 import { Skills } from './components/Skills';
 import { Contact } from './components/Contact';
 import { ThemeProvider } from './context/ThemeContext';
+import { LanguageProvider } from './context/LanguageContext';
 import { ThemeSwitcher } from './components/ThemeSwitcher';
 import { useTheme } from './context/ThemeContext';
 
@@ -41,9 +42,11 @@ function AppContent() {
 
 function App() {
   return (
-    <ThemeProvider>
-      <AppContent />
-    </ThemeProvider>
+    <LanguageProvider>
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
+    </LanguageProvider>
   );
 }
 
