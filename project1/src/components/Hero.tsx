@@ -8,7 +8,7 @@ export const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="home" className={`min-h-screen flex items-center relative overflow-hidden ${theme === 'dark' ? 'bg-background-dark' : 'bg-white'}`}>
+    <section id="home" className={`min-h-screen flex items-center relative overflow-hidden ${theme === 'dark' ? 'bg-background-dark' : 'bg-white animate-pulseBackground'}`}>
       <div className="absolute inset-0 flex items-center justify-center opacity-10">
         <motion.div
           animate={{ rotate: 360 }}
@@ -68,7 +68,7 @@ export const Hero = () => {
             <div className="relative w-64 h-64 md:w-80 md:h-80">
               <div className={`absolute inset-0 rounded-full ${theme === 'dark' ? 'bg-gradient-to-r from-primary to-accent opacity-20' : 'bg-gradient-to-r from-primary to-accent opacity-10'} blur-3xl animate-pulse`} />
               <img
-                src="https://images.unsplash.com/photo-1580927752452-89d86da3fa0a?q=80&w=1000&auto=format&fit=crop"
+                src="/Anas Zehraoui.jpg"
                 alt="Professional photo"
                 className="rounded-full object-cover shadow-xl relative z-10"
               />

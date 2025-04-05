@@ -9,8 +9,8 @@ export const Experience = () => {
 
   const companyLogos = {
     "Airbus": "https://imgs.search.brave.com/XH2X63RhrmAv5_BXUo3j9sN-P-f2I6o8waj_fnIfN4A/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly91cGxv/YWQud2lraW1lZGlh/Lm9yZy93aWtpcGVk/aWEvY29tbW9ucy81/LzVkL0FpcmJ1c19M/b2dvXzIwMTcuc3Zn",
-    "CETIM": "https://www.cetim.fr/wp-content/themes/cetim/img/logo-cetim.svg",
-    "Junior Entreprise POLYTECH LILLE": "https://www.juniorpolytech.fr/wp-content/uploads/2019/09/logo-junior-polytech-lille.png"
+    "CETIM": "/logos/Cetim.png",
+    "Junior Entreprise POLYTECH LILLE": "/logos/pulce-300x300.png"
   };
 
   const experiences = [

@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { LanguageSwitcher } from './LanguageSwitcher';
+import { useTheme } from '../context/ThemeContext';
 
 const navItems = [
   { href: '#home', label: 'nav.home' },
@@ -16,12 +17,13 @@ const navItems = [
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation();
+  const { theme } = useTheme();
 
   return (
-    <header className="fixed w-full bg-background-light/80 backdrop-blur-lg border-b border-primary/10 z-50">
+    <header className={`fixed w-full ${theme === 'dark' ? 'bg-background-light/80' : 'bg-dark-blue/80'} backdrop-blur-lg border-b border-primary/10 z-50`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="text-2xl font-bold text-primary">
+          <a href="#" className={`text-2xl font-bold ${theme === 'dark' ? 'text-primary' : 'text-dark-blue'}`}>
             <span className="text-accent">&lt;</span>
             AZ
             <span className="text-accent">/&gt;</span>
@@ -33,7 +35,7 @@ export const Header = () => {
                 <li key={item.href}>
                   <a 
                     href={item.href}
-                    className="text-gray-300 hover:text-accent transition-colors relative group"
+                    className={`relative group ${theme === 'dark' ? 'text-gray-300' : 'text-dark-blue'} hover:font-bold`}
                   >
                     {t(item.label)}
                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full" />
@@ -45,7 +47,7 @@ export const Header = () => {
           </nav>
 
           <button 
-            className="md:hidden text-gray-300 hover:text-accent transition-colors"
+            className={`md:hidden ${theme === 'dark' ? 'text-gray-300' : 'text-dark-blue'} hover:text-accent transition-colors`}
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X /> : <Menu />}
@@ -66,7 +68,7 @@ export const Header = () => {
                 <li key={item.href}>
                   <a 
                     href={item.href}
-                    className="block text-gray-300 hover:text-accent transition-colors"
+                    className={`block ${theme === 'dark' ? 'text-gray-300' : 'text-dark-blue'} hover:font-bold hover:text-accent transition-colors`}
                     onClick={() => setIsOpen(false)}
                   >
                     {t(item.label)}
